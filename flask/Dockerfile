@@ -23,4 +23,3 @@ WORKDIR ${WORKDIR}
 RUN pip install setuptools==45
 RUN pip install -r ./requirements.txt --no-cache-dir
 
-CMD python manage.py run

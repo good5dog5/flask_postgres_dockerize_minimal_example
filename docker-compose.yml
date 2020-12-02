@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  flask:
+    build: ./flask
+    container_name: my_flask
+    command: python manage.py run 
+    # restart: always
+    environment:
+      - APP_NAME=FlaskApp
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+  db:
+    environment:
+      - POSTGRES_USER=jordan
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=postgres
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    ports:
+      - 5432:5432
+
