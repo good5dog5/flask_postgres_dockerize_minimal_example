@@ -1,4 +1,16 @@
-# Flask on Docker with external PostgreSQL database
+# USAGE
+
+## Build
+
+```
+docker-compose build --force-rm
+```
+
+## Run it
+```
+docker-compose up
+```
+
 
 # Testing
 
@@ -27,4 +39,13 @@ application/json" -d "{ \"first_name\": \"a_first_name\", \"last_name\": \"a_las
 * delete a user by id
 ```
 curl -X DELETE "http://localhost:5000/user/2" -H "accept: application/json"
+```
+
+
+## Useful command
+
+* delete all containers
+
+```
+docker rm -f $(docker ps -a -q)
 ```
