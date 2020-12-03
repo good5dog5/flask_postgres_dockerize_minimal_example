@@ -3,6 +3,7 @@ from flask_restplus import Resource
 from app.main.service.user_service import get_all_users, \
     get_user, \
     update_user, \
+    delete_user, \
     save_new_user
 
 from app.main.util.dto import UserDto
@@ -42,12 +43,14 @@ class UserList(Resource):
         else:
             return user
 
+    @api.doc('delete user by id')
+    def delete(self, user_id):
+        return delete_user(user_id)
+
     @api.expect(_user, validate=True)
     @api.marshal_with(_user, envelope='data')
     def put(self, user_id):
         """Update a user"""
-        user = get_user(user_id)
-        if user is not None:
-            user.update(api.payload)
-        return user
+        data = request.json
+        return update_user(user_id, data=data)
 
