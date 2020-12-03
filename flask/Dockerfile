@@ -10,11 +10,12 @@ ENV FLASK_APP=app.py
 
 RUN apk -U add vim
 RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
+    && apk add postgresql-dev gcc python3-dev musl-dev postgresql-client
 
 RUN mkdir -p ${WORKDIR}
 COPY requirements.txt ${WORKDIR}
 COPY manage.py ${WORKDIR}
+COPY test_db.py ${WORKDIR}
 COPY .env ${WORKDIR}
 ADD app/ ${WORKDIR}/app
 
