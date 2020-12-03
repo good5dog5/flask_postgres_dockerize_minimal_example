@@ -8,11 +8,14 @@ services:
     # restart: always
     environment:
       - APP_NAME=FlaskApp
+
     ports:
       - 5000:5000
     depends_on:
-      - db
-  db:
+      - postgres_db
+    links:
+      - postgres_db
+  postgres_db:
     environment:
       - POSTGRES_USER=jordan
       - POSTGRES_PASSWORD=1234
@@ -20,6 +23,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.db
+
     ports:
       - 5432:5432
 
